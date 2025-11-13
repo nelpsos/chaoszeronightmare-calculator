@@ -1,74 +1,85 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>カオゼロ（Chaos Zero Nightmare）｜セーブデータ計算機</title>
-  <style>
-    :root{--bg:#0f1115;--card:#171a21;--muted:#aab3c0;--text:#e8edf4;--accent:#7dd3fc;--danger:#f87171;--ok:#86efac;}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:#0f1115;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    .wrap{max-width:1680px;margin:24px auto;padding:0 20px}
-    h1{font-size:24px;margin:0 0 6px;font-weight:800;letter-spacing:.2px}
-    h1 .en{font-size:.8em;color:var(--muted);font-weight:700}
-    .sub{margin:0 2px 6px;font-size:12px;color:var(--muted)}
-    .author{margin:0 2px 14px;font-size:12px;color:#9fb0c8}
-    .langbar{display:flex;gap:6px;align-items:center;margin-bottom:8px}
-    .langbtn{cursor:pointer;padding:6px 10px;border:1px solid #2a3140;border-radius:999px;background:#0e1218;color:#cfe2ff;font-size:12px;user-select:none}
-    .langbtn.active{background:linear-gradient(180deg,#f0f4ff,#cfe8ff);color:#0b0e13;font-weight:700}
-    .tabs{display:flex;gap:8px;margin:10px 0 16px;flex-wrap:wrap}
-    .tab{cursor:pointer;padding:8px 12px;border:1px solid #2a3140;border-radius:10px;background:#0e1218;color:#cfe2ff;user-select:none}
-    .tab.active{background:linear-gradient(180deg,#f0f4ff,#cfe8ff);color:#0b0e13;font-weight:700}
-    .grid{display:grid;gap:16px}
-    @media(min-width:1200px){.grid{grid-template-columns:1.1fr 1.9fr}}
-    .card{background:var(--card);border:1px solid #222736;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .row>label{font-size:13px;color:var(--muted)}
-    select,input[type='number']{background:#0e1218;border:1px solid #2a3140;border-radius:10px;color:var(--text);padding:8px 10px}
-    input[type='checkbox']{transform:scale(1.1)}
-    .pill{padding:6px 10px;border:1px solid #2a3140;border-radius:999px;font-size:12px;color:var(--muted)}
-    .btn{cursor:pointer;border:none;border-radius:10px;padding:10px 12px;color:#0b0e13;font-weight:600;background:linear-gradient(180deg,#f0f4ff,#cfe8ff);}
-    .btn.secondary{background:#273142;color:var(--text);border:1px solid #364258}
-    .btn.danger{background:#402b2b;color:#ffd7d7;border:1px solid #5e3e3e}
-    .btn.full{width:100%}
-    .btn.small{padding:6px 9px;font-size:12px}
-    .btn:disabled{opacity:.5;cursor:not-allowed}
-    .stack{display:grid;gap:12px}
-    .section-title{font-weight:700;margin:4px 0 8px}
-    .bar{height:10px;background:#1b2130;border-radius:999px;overflow:hidden}
-    .bar>span{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#38bdf8);width:0%}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .log{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;border:1px solid #263044;background:#121722;border-radius:10px;padding:8px 10px}
-    .log.child{grid-template-columns:1fr auto auto auto;background:#0f141d;border:1px dashed #2a364c;margin-left:28px;font-size:0.66em;padding:6px 8px}
-    .muted{color:var(--muted);font-size:12px}
-    .pt-ok{color:var(--ok);font-weight:700}
-    .chips{display:flex;flex-wrap:wrap;gap:6px}
-    .chip{border:1px dashed #344055;border-radius:999px;padding:3px 8px;font-size:12px;color:#a9b6cb}
-    .hr{height:1px;background:#232a38;margin:6px 0 10px}
-    .note{font-size:12px;color:#9fb0c8}
-    .xbtn{background:#2a3040;color:#cbd5e1;border:1px solid #3a4355;border-radius:8px;padding:4px 8px;font-size:12px;cursor:pointer}
-    .xbtn:hover{background:#343c50}
-    .tiny{font-size:11px}
-    .truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .panel{display:none}
-    .panel.active{display:block}
-    .dangerBanner{background:#3b1f20;border:1px solid #7f1d1d;color:#fecaca;padding:8px 10px;border-radius:10px}
-    #footerNote{margin-top:12px;font-size:12px;color:#9fb0c8}
-    table{width:100%;border-collapse:collapse}
-    th,td{border-bottom:1px solid #273043;padding:6px 8px;text-align:left;font-size:13px}
-    th{color:#c7d2fe}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>カオゼロ（Chaos Zero Nightmare）｜セーブデータ計算機 v30</title>
+<meta name="description" content="カオゼロ(CZN)のセーブデータ計算機。共用/モンスター/ヒラメキ/神ヒラメキ/禁忌カードのポイント管理。 Also: 카오제로 계산기 / KaoZero calculator / 卡奥零 计算器">
+<meta property="og:title" content="カオゼロ｜セーブデータ計算機 (KaoZero / CZN)">
+<meta property="og:description" content="CZN save-data calculator. 카오제로 계산기 / 卡奥零 计算器">
+<meta property="og:type" content="website">
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--muted:#aab3c0;--text:#e8edf4;--accent:#7dd3fc;--danger:#f87171;--ok:#86efac;}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:#0f1115;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  .wrap{max-width:1680px;margin:24px auto;padding:0 20px}
+  h1{font-size:24px;margin:0 0 6px;font-weight:800;letter-spacing:.2px}
+  h1 .en{font-size:.8em;color:var(--muted);font-weight:700}
+  .sub{margin:0 2px 6px;font-size:12px;color:var(--muted)}
+  .author{margin:0 2px 14px;font-size:12px;color:#9fb0c8}
+  .topbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .langbar{display:flex;gap:6px;align-items:center}
+  .langbtn{cursor:pointer;padding:6px 10px;border:1px solid #2a3140;border-radius:999px;background:#0e1218;color:#cfe2ff;font-size:12px;user-select:none}
+  .langbtn.active{background:linear-gradient(180deg,#f0f4ff,#cfe8ff);color:#0b0e13;font-weight:700}
+  .tabs{display:flex;gap:8px;margin:10px 0 16px;flex-wrap:wrap}
+  .tab{cursor:pointer;padding:8px 12px;border:1px solid #2a3140;border-radius:10px;background:#0e1218;color:#cfe2ff;user-select:none}
+  .tab.active{background:linear-gradient(180deg,#f0f4ff,#cfe8ff);color:#0b0e13;font-weight:700}
+  .grid{display:grid;gap:16px}
+  @media(min-width:1200px){.grid{grid-template-columns:1.1fr 1.9fr}}
+  .card{background:var(--card);border:1px solid #222736;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .row>label{font-size:13px;color:var(--muted)}
+  select,input[type='number']{background:#0e1218;border:1px solid #2a3140;border-radius:10px;color:var(--text);padding:8px 10px}
+  input[type='checkbox']{transform:scale(1.1)}
+  .pill{padding:6px 10px;border:1px solid #2a3140;border-radius:999px;font-size:12px;color:var(--muted)}
+  .btn{cursor:pointer;border:none;border-radius:10px;padding:10px 12px;color:#0b0e13;font-weight:600;background:linear-gradient(180deg,#f0f4ff,#cfe8ff);}
+  .btn.secondary{background:#273142;color:var(--text);border:1px solid #364258}
+  .btn.danger{background:#402b2b;color:#ffd7d7;border:1px solid #5e3e3e}
+  .btn.full{width:100%}
+  .btn.small{padding:6px 9px;font-size:12px}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .stack{display:grid;gap:12px}
+  .section-title{font-weight:700;margin:4px 0 8px}
+  .bar{height:10px;background:#1b2130;border-radius:999px;overflow:hidden}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#38bdf8);width:0%}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .log{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;border:1px solid #263044;background:#121722;border-radius:10px;padding:8px 10px}
+  .log.child{grid-template-columns:1fr auto auto auto;background:#0f141d;border:1px dashed #2a364c;margin-left:28px;font-size:0.66em;padding:6px 8px}
+  .muted{color:var(--muted);font-size:12px}
+  .pt-ok{color:var(--ok);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1px dashed #344055;border-radius:999px;padding:3px 8px;font-size:12px;color:#a9b6cb}
+  .hr{height:1px;background:#232a38;margin:6px 0 10px}
+  .note{font-size:12px;color:#9fb0c8}
+  .xbtn{background:#2a3040;color:#cbd5e1;border:1px solid #3a4355;border-radius:8px;padding:4px 8px;font-size:12px;cursor:pointer}
+  .xbtn:hover{background:#343c50}
+  .tiny{font-size:11px}
+  .truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .panel{display:none}
+  .panel.active{display:block}
+  #footerNote{margin-top:12px;font-size:12px;color:#9fb0c8}
+
+  /* i18n SEO blocks - bottom, small & subtle */
+  #i18n-seo{margin-top:18px}
+  #i18n-seo details{background:#10141c;border:1px solid #202638;border-radius:10px;padding:6px 10px;margin:6px 0}
+  #i18n-seo summary{cursor:pointer;color:#93a5c6;font-size:12px}
+  #i18n-seo h2{font-size:13px;margin:4px 0;color:#aebbd4}
+  #i18n-seo p{font-size:12px;color:#b8c6de;line-height:1.55}
+  #i18n-seo .hint{font-size:11px;color:#7f8aa4;margin-bottom:6px}
+</style>
 </head>
 <body>
   <div class="wrap">
-    <div class="langbar">
-      <span class="muted" data-i18n="langLabel">言語</span>
-      <div class="langbtn active" data-lang="ja">日本語</div>
-      <div class="langbtn" data-lang="ko">한국어</div>
-      <div class="langbtn" data-lang="zh">中文</div>
-      <div class="langbtn" data-lang="en">English</div>
+    <div class="topbar">
+      <div class="langbar">
+        <span class="muted" data-i18n="langLabel">言語</span>
+        <div class="langbtn active" data-lang="ja">日本語</div>
+        <div class="langbtn" data-lang="ko">한국어</div>
+        <div class="langbtn" data-lang="zh">中文</div>
+        <div class="langbtn" data-lang="en">English</div>
+      </div>
     </div>
 
     <h1><span class="ja" data-i18n="titleJa">カオゼロ</span><span class="en">（Chaos Zero Nightmare）</span><span data-i18n="titleSep">｜</span><span data-i18n="titleTool">セーブデータ計算機</span></h1>
@@ -86,6 +97,39 @@
     <div id="panelC" class="panel"></div>
 
     <div id="footerNote" data-i18n="footerNote">※ティアは全タブ共通です（どこで変更してもリンク）。他の設定・履歴は各タブで独立管理（ローカル保存対応）。</div>
+
+    <!-- Multilingual SEO visible blocks (moved to bottom, small) -->
+    <section id="i18n-seo" aria-label="Multilingual descriptions (SEO)">
+      <div class="hint">※ 多言語の検索用短文（折りたたみ）。UIには影響しません。</div>
+
+      <details>
+        <summary>한국어 안내 (Korean)</summary>
+        <h2 lang="ko">카오제로 계산기 (CZN 계산기)</h2>
+        <p lang="ko">
+          Chaos Zero Nightmare 세이브 데이터 포인트 계산기입니다.
+          공용 카드, 몬스터 카드, 히라메키/신 히라메키, 금기 카드 포인트를 자동 합산하고
+          티어 상한에 맞춰 남은 포인트를 계산합니다.
+        </p>
+      </details>
+
+      <details>
+        <summary>中文简介 (Chinese)</summary>
+        <h2 lang="zh-Hans">卡奥零 计算器（CZN 计算器）</h2>
+        <p lang="zh-Hans">
+          Chaos Zero Nightmare 存档数据计算器。支持共用/怪物卡、灵感/神灵感、
+          禁忌卡等项目的积分统计，并根据层级上限计算剩余积分。
+        </p>
+      </details>
+
+      <details>
+        <summary>English</summary>
+        <h2 lang="en">KaoZero Calculator (CZN Save Data Calculator)</h2>
+        <p lang="en">
+          Save-data points calculator for Chaos Zero Nightmare. Totals Common/Monster cards,
+          Spark/God-Spark, and Taboo cards, respecting tier caps to show remaining points.
+        </p>
+      </details>
+    </section>
   </div>
 
 <script>
@@ -119,13 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btnUnique:'固有カードを記録', btnRemove:'排除を記録', btnCopy:'コピーを記録',
       btnUndo:'戻す', btnClear:'クリア', btnExport:'履歴CSV',
       logs:'履歴', noLogs:'まだ記録がありません。',
-      probTitle:'曖昧な記憶の記録確率（超過時の推定）',
-      effCap:'実質上限', ambTotal:'曖昧合計',
-      trials:'試行回数', btnProb:'確率を計算',
-      probCalc:'計算中…', probDone:'完了',
-      tabooWarn:(n,cut)=>`⚠ 禁忌カード ${n} 枚あり：実質上限を ${cut} pt 控除しています。`,
-      noteBottom:'禁忌カードは必ず記録（100%）→実質上限から控除。付随するヒラメキ/神ヒラメキは曖昧扱い。二段階抽選（親→子）で近似。',
-      tableHeadItem:'項目', tableHeadPt:'pt', tableHeadProb:'記録確率',
       footerNote:'※ティアは全タブ共通です（どこで変更してもリンク）。他の設定・履歴は各タブで独立管理（ローカル保存対応）。',
       addRemoveTag:'+ 【排除】効果(0pt)', addRemoveBonus:'+ 開始固有カードの排除+20',
       addSpark0:'+ ヒラメキ+0', addSpark10:'+ ヒラメキ+10', addGod20:'+ 神ヒラメキ+20',
@@ -157,13 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btnUnique:'고유 카드를 기록', btnRemove:'제거를 기록', btnCopy:'복사를 기록',
       btnUndo:'되돌리기', btnClear:'초기화', btnExport:'기록 CSV',
       logs:'기록', noLogs:'아직 기록이 없습니다.',
-      probTitle:'애매한 기억 기록 확률(초과 시 추정)',
-      effCap:'실질 상한', ambTotal:'애매 합계',
-      trials:'시행 횟수', btnProb:'확률 계산',
-      probCalc:'계산 중…', probDone:'완료',
-      tabooWarn:(n,cut)=>`⚠ 금기 카드 ${n}장: 실질 상한에서 ${cut} pt 차감합니다.`,
-      noteBottom:'금기 카드는 100% 기록 → 실질 상한에서 차감. 부속 번뜩임/신의 번뜩임은 애매로 계산. 부모→자식 2단계 추정.',
-      tableHeadItem:'항목', tableHeadPt:'pt', tableHeadProb:'기록 확률',
       footerNote:'※ 티어는 모든 탭에서 공통(어디서 바꿔도 동기화). 다른 설정/기록은 탭별로 독립 저장(localStorage).',
       addRemoveTag:'+ 【제거】효과(0pt)', addRemoveBonus:'+ 시작/고유 카드 제거+20',
       addSpark0:'+ 번뜩임+0', addSpark10:'+ 번뜩임+10', addGod20:'+ 신의 번뜩임+20',
@@ -195,13 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btnUnique:'记录固有卡', btnRemove:'记录移除', btnCopy:'记录复制',
       btnUndo:'撤销', btnClear:'清空', btnExport:'导出记录CSV',
       logs:'记录', noLogs:'尚无记录。',
-      probTitle:'“模糊记忆”记录概率（超上限时估计）',
-      effCap:'实际上限', ambTotal:'模糊合计',
-      trials:'试验次数', btnProb:'计算概率',
-      probCalc:'计算中…', probDone:'完成',
-      tabooWarn:(n,cut)=>`⚠ 存在禁忌卡 ${n} 张：实际上限扣除 ${cut} pt。`,
-      noteBottom:'禁忌卡必定记录（100%）→从实际上限扣除。其附带的灵感/神灵感按模糊处理。父→子的两段式抽样近似。',
-      tableHeadItem:'项目', tableHeadPt:'pt', tableHeadProb:'记录概率',
       footerNote:'※ 层级对所有标签通用（任意处修改都会同步）。其他设置/记录按标签独立保存（localStorage）。',
       addRemoveTag:'+ 【移除】效果(0pt)', addRemoveBonus:'+ 移除开始/固有卡+20',
       addSpark0:'+ 灵感+0', addSpark10:'+ 灵感+10', addGod20:'+ 神灵感+20',
@@ -233,27 +256,20 @@ document.addEventListener('DOMContentLoaded', () => {
       btnUnique:'Log Unique Card', btnRemove:'Log Remove', btnCopy:'Log Copy',
       btnUndo:'Undo', btnClear:'Clear', btnExport:'Export CSV',
       logs:'Log', noLogs:'No entries yet.',
-      probTitle:'Recording Probabilities for “Ambiguous Memory” (when over cap)',
-      effCap:'Effective Cap', ambTotal:'Ambiguous Total',
-      trials:'Trials', btnProb:'Compute',
-      probCalc:'Computing…', probDone:'Done',
-      tabooWarn:(n,cut)=>`⚠ ${n} Taboo card(s): deduct ${cut} pt from effective cap.`,
-      noteBottom:'Taboo card is always recorded (100%) → deducted from effective cap. Attached Spark/God-Spark are ambiguous. Two-stage sampling (parent→child) approximation.',
-      tableHeadItem:'Item', tableHeadPt:'pt', tableHeadProb:'Prob. Recorded',
       footerNote:'* Tier is shared across tabs; other settings/logs are per-tab and saved locally.',
       addRemoveTag:'+ [Remove] effect (0pt)', addRemoveBonus:'+ Remove Start/Unique +20',
       addSpark0:'+ Spark+0', addSpark10:'+ Spark+10', addGod20:'+ God-Spark+20',
       childSpark:'↳ Spark', childGod:'↳ God-Spark'
     }
   };
-  function getLang(){ return localStorage.getItem(LANG_KEY) || 'ja'; }
-  function setLang(l){ localStorage.setItem(LANG_KEY, l); }
-  function t(key){
+  const getLang = () => localStorage.getItem(LANG_KEY) || 'ja';
+  const setLang = (l) => localStorage.setItem(LANG_KEY, l);
+  const t = (key) => {
     const dict = i18n[getLang()] || i18n.ja;
     const val = dict[key];
-    return (typeof val==='function') ? val : (val ?? (i18n.ja[key] ?? key));
-  }
-  function applyStaticI18n(){
+    return (typeof val==='function') ? val() : (val ?? (i18n.ja[key] ?? key));
+  };
+  const applyStaticI18n = () => {
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const key = el.getAttribute('data-i18n');
       el.textContent = t(key);
@@ -262,24 +278,45 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', btn.getAttribute('data-lang')===getLang());
     });
     document.documentElement.lang = getLang();
-  }
+  };
 
-  // ---------- shared tier ----------
+  // 表示ラベルのローカライズ（内部トークンは日本語）
+  const localizeCoreLabel = (label) => {
+    switch(label){
+      case '共用カード獲得': return t('commonGet');
+      case 'モンスターカード獲得': return t('monGet');
+      case 'カード変換': return t('convert');
+      case '禁忌カード': return t('taboo');
+      case '固有カード': return t('unique');
+      default:
+        if(label && label.startsWith('排除')) return t('remove');
+        if(label && label.startsWith('コピー')) return t('copy');
+        return label;
+    }
+  };
+  const localizeNotePart = (part) => {
+    if(part==='【排除】効果') return t('removeTag');
+    if(part==='開始固有カードの排除+20') return t('removeBonus');
+    if(part==='ヒラメキ+0' || part==='ヒラメキ+10' || part==='神ヒラメキ+20') return ''; // 子行で表示
+    return part;
+  };
+
+  // 共有ティア
   const TIER_KEY='czn_shared_tier_v1';
   const shared = {
     get tier(){ try{ return parseInt(localStorage.getItem(TIER_KEY)||'1',10)||1; }catch(_){ return 1; } },
     set tier(v){ localStorage.setItem(TIER_KEY, String(v)); document.dispatchEvent(new CustomEvent('czn:tier-changed',{detail:{tier:v}})); }
   };
 
-  // tab names
+  // タブ名保存
   const NAME_KEY='czn_tab_names_v1';
-  function loadTabNames(){ try{ return JSON.parse(localStorage.getItem(NAME_KEY)||'{}'); }catch(_){ return {}; } }
-  function saveTabNames(map){ localStorage.setItem(NAME_KEY, JSON.stringify(map)); }
+  const loadTabNames = () => { try{ return JSON.parse(localStorage.getItem(NAME_KEY)||'{}'); }catch(_){ return {}; } };
+  const saveTabNames = (map) => localStorage.setItem(NAME_KEY, JSON.stringify(map));
   const tabNames = loadTabNames();
   document.querySelectorAll('.tab').forEach(tab=>{
     const id = tab.getAttribute('data-panel');
     if(tabNames[id]) tab.textContent = tabNames[id];
-    tab.setAttribute('title','ダブルクリックでタブ名を変更');
+    tab.title='ダブルクリックでタブ名を変更';
     tab.addEventListener('dblclick', (e)=>{
       e.preventDefault();
       const current = tab.textContent.trim();
@@ -293,174 +330,134 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function qs(root, sel){ return root.querySelector(sel); }
-  const removeBaseN = (n)=>{ if (n<=1) return 0; if (n===2) return 10; if (n===3) return 30; if (n===4) return 50; return 70; };
-  const copyBaseN   = (n)=>{ if (n<=1) return 0; if (n===2) return 10; if (n===3) return 30; if (n===4) return 50; return 70; };
+  const qs = (root, sel)=> root.querySelector(sel);
+  const removeBaseN = (n)=> (n<=1?0:(n===2?10:(n===3?30:(n===4?50:70))));
+  const copyBaseN   = (n)=> (n<=1?0:(n===2?10:(n===3?30:(n===4?50:70))));
 
   function buildCalculator(container, suffix){
     const STORAGE_KEY = `czn_panel_${suffix}_v1`;
-    function loadState(){
+    const loadState = () => {
       try{
         const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        return {
-          nightmare: !!raw.nightmare,
-          tierOffset: Number.isFinite(raw.tierOffset)? raw.tierOffset : 0,
-          logsRaw: Array.isArray(raw.logsRaw)? raw.logsRaw : []
-        };
+        return {nightmare: !!raw.nightmare, tierOffset: Number.isFinite(raw.tierOffset)? raw.tierOffset : 0, logsRaw: Array.isArray(raw.logsRaw)? raw.logsRaw : []};
       }catch(_){ return {nightmare:false, tierOffset:0, logsRaw:[]}; }
-    }
-    function saveState(){
-      const data = {nightmare:state.nightmare, tierOffset:state.tierOffset, logsRaw:state.logsRaw};
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
-
-    container.innerHTML = `
-      <div class="grid">
-        <div class="card">
-          <div class="stack">
-            <div class="row">
-              <div class="row" style="gap:8px">
-                <label data-i18n="tier">${t('tier')}</label>
-                <select data-id="tier"></select>
-              </div>
-              <div class="row" style="gap:8px">
-                <label data-i18n="nightmare">${t('nightmare')}</label>
-                <input type="checkbox" data-id="nightmare" />
-                <span class="muted tiny" data-i18n="nightmareNote">${t('nightmareNote')}</span>
-              </div>
-              <div class="row" style="gap:8px">
-                <label data-i18n="tierOffset">${t('tierOffset')}</label>
-                <input type="number" data-id="tierOffset" value="0" step="1" min="0" style="width:90px" />
-                <span class="muted tiny" data-i18n="codexHint">${t('codexHint')}</span>
-              </div>
-              <div class="pill"><span data-i18n="cap">${t('cap')}</span> <span data-id="cap">—</span> pt</div>
-            </div>
-
-            <div>
-              <div class="row" style="justify-content:space-between">
-                <div class="muted"><span data-i18n="total">${t('total')}</span> <b data-id="spent">0</b> pt</div>
-                <div class="muted"><span data-i18n="remain">${t('remain')}</span> <b data-id="remain">0</b> pt</div>
-              </div>
-              <div class="bar"><span data-id="bar"></span></div>
-            </div>
-
-            <div class="section-title" data-i18n="singleEvents">${t('singleEvents')}</div>
-            <div class="grid-3">
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between"><b data-i18n="commonGet">${t('commonGet')}</b><span class="muted">+20pt</span></div>
-                  <button class="btn full" data-id="btn-common" data-i18n="btnCommon">${t('btnCommon')}</button>
-                </div>
-              </div>
-
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between"><b data-i18n="monGet">${t('monGet')}</b><span class="muted">+80pt</span></div>
-                  <button class="btn full" data-id="btn-mon" data-i18n="btnMon">${t('btnMon')}</button>
-                </div>
-              </div>
-
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between"><b data-i18n="convert">${t('convert')}</b><span class="muted">+10pt</span></div>
-                  <div class="muted tiny" data-i18n="noteConvert">${t('noteConvert')}</div>
-                  <button class="btn full" data-id="btn-conv" data-i18n="btnConv">${t('btnConv')}</button>
-                </div>
-              </div>
-
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between"><b data-i18n="taboo">${t('taboo')}</b><span class="muted">+20pt</span></div>
-                  <button class="btn full" data-id="btn-taboo" data-i18n="btnTaboo">${t('btnTaboo')}</button>
-                </div>
-              </div>
-
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between"><b data-i18n="unique">${t('unique')}</b><span class="muted">±0pt</span></div>
-                  <div class="muted tiny" data-i18n="uniqueNote">${t('uniqueNote')}</div>
-                  <button class="btn full" data-id="btn-unique" data-i18n="btnUnique">${t('btnUnique')}</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="section-title" data-i18n="stepEvents">${t('stepEvents')}</div>
-            <div class="grid-2">
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between">
-                    <b data-i18n="remove">${t('remove')}</b><span class="muted"><span data-i18n="next">${t('next')}</span> = <b data-id="nextRemove">0</b> pt</span>
-                  </div>
-                  <div class="chips">
-                    <label class="chip"><input type="checkbox" data-id="chk-remove-bonus" /> <span data-i18n="removeBonus">${t('removeBonus')}</span></label>
-                    <label class="chip"><input type="checkbox" data-id="chk-remove-tag" /> <span data-i18n="removeTag">${t('removeTag')}</span></label>
-                  </div>
-                  <button class="btn full" data-id="btn-remove" data-i18n="btnRemove">${t('btnRemove')}</button>
-                  <div class="muted tiny" data-i18n="removeProg">${t('removeProg')}</div>
-                </div>
-              </div>
-
-              <div class="card" style="padding:12px">
-                <div class="stack">
-                  <div class="row" style="justify-content:space-between">
-                    <b data-i18n="copy">${t('copy')}</b><span class="muted"><span data-i18n="next">${t('next')}</span> = <b data-id="nextCopy">0</b> pt</span>
-                  </div>
-                  <div class="chips">
-                    <label class="chip"><input type="checkbox" data-id="chk-copy-spark" /> <span data-i18n="spark">${t('spark')}</span></label>
-                    <label class="chip"><input type="checkbox" data-id="chk-copy-god" /> <span data-i18n="god">${t('god')}</span></label>
-                  </div>
-                  <button class="btn full" data-id="btn-copy" data-i18n="btnCopy">${t('btnCopy')}</button>
-                  <div class="muted tiny" data-i18n="copyProg">${t('copyProg')}</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" style="justify-content:flex-end;gap:8px">
-              <button class="btn secondary small" data-id="btn-undo" data-i18n="btnUndo">${t('btnUndo')}</button>
-              <button class="btn danger small" data-id="btn-clear" data-i18n="btnClear">${t('btnClear')}</button>
-              <button class="btn small" data-id="btn-export" data-i18n="btnExport">${t('btnExport')}</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="stack">
-            <div class="section-title" data-i18n="logs">${t('logs')}</div>
-            <div data-id="logs" class="stack" style="gap:8px"><div class="muted" data-i18n="noLogs">${t('noLogs')}</div></div>
-            <div class="hr"></div>
-
-            <div class="stack">
-              <div class="row" style="justify-content:space-between"><span class="muted" data-i18n="cap">${t('cap')}</span><b data-id="sumCap">— pt</b></div>
-              <div class="row" style="justify-content:space-between"><span class="muted" data-i18n="total">${t('total')}</span><b data-id="sumSpent">0 pt</b></div>
-              <div class="row" style="justify-content:space-between"><span class="muted" data-i18n="remain">${t('remain')}</span><b data-id="sumRemain">0 pt</b></div>
-            </div>
-
-            <div class="hr"></div>
-            <div class="section-title" data-i18n="probTitle">${t('probTitle')}</div>
-            <div class="stack">
-              <div data-id="tabooBanner" style="display:none" class="dangerBanner"></div>
-              <div class="row" style="gap:10px">
-                <div class="pill"><span data-i18n="effCap">${t('effCap')}</span> <span data-id="effCap">—</span> pt</div>
-                <div class="pill"><span data-i18n="ambTotal">${t('ambTotal')}</span> <span data-id="ambTotal">—</span> pt</div>
-                <label class="row" style="gap:6px"><span data-i18n="trials">${t('trials')}</span> <input data-id="trials" type="number" min="200" step="200" value="5000" style="width:90px"/></label>
-                <button class="btn small" data-id="btn-prob" data-i18n="btnProb">${t('btnProb')}</button>
-              </div>
-              <div data-id="probStatus" class="muted tiny"></div>
-              <div data-id="probResult"></div>
-            </div>
-
-            <p class="note" data-i18n="noteBottom">${t('noteBottom')}</p>
-          </div>
-        </div>
-      </div>
-    `;
-
+    };
     const state = loadState();
-    const $ = (sel)=> qs(container, sel);
-    const tokens = (s)=> (s||'').split('・').filter(Boolean);
-    const hasToken = (s, t)=> tokens(s).includes(t);
+    const saveState = () => localStorage.setItem(STORAGE_KEY, JSON.stringify({nightmare:state.nightmare, tierOffset:state.tierOffset, logsRaw:state.logsRaw}));
 
-    // elements
+    // UI
+    container.innerHTML = [
+      '<div class="grid">',
+        '<div class="card">',
+          '<div class="stack">',
+            '<div class="row">',
+              '<div class="row" style="gap:8px">',
+                `<label data-i18n="tier">${t('tier')}</label>`,
+                '<select data-id="tier"></select>',
+              '</div>',
+              '<div class="row" style="gap:8px">',
+                `<label data-i18n="nightmare">${t('nightmare')}</label>`,
+                '<input type="checkbox" data-id="nightmare" />',
+                `<span class="muted tiny" data-i18n="nightmareNote">${t('nightmareNote')}</span>`,
+              '</div>',
+              '<div class="row" style="gap:8px">',
+                `<label data-i18n="tierOffset">${t('tierOffset')}</label>`,
+                '<input type="number" data-id="tierOffset" value="0" step="1" min="0" style="width:90px" />',
+                `<span class="muted tiny" data-i18n="codexHint">${t('codexHint')}</span>`,
+              '</div>',
+              `<div class="pill"><span data-i18n="cap">${t('cap')}</span> <span data-id="cap">—</span> pt</div>`,
+            '</div>',
+            '<div>',
+              '<div class="row" style="justify-content:space-between">',
+                `<div class="muted"><span data-i18n="total">${t('total')}</span> <b data-id="spent">0</b> pt</div>`,
+                `<div class="muted"><span data-i18n="remain">${t('remain')}</span> <b data-id="remain">0</b> pt</div>`,
+              '</div>',
+              '<div class="bar"><span data-id="bar"></span></div>',
+            '</div>',
+            `<div class="section-title" data-i18n="singleEvents">${t('singleEvents')}</div>`,
+            '<div class="grid-3">',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="commonGet">${t('commonGet')}</b><span class="muted">+20pt</span></div>`,
+                  `<button type="button" class="btn full" data-id="btn-common" data-i18n="btnCommon">${t('btnCommon')}</button>`,
+                '</div>',
+              '</div>',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="monGet">${t('monGet')}</b><span class="muted">+80pt</span></div>`,
+                  `<button type="button" class="btn full" data-id="btn-mon" data-i18n="btnMon">${t('btnMon')}</button>`,
+                '</div>',
+              '</div>',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="convert">${t('convert')}</b><span class="muted">+10pt</span></div>`,
+                  `<div class="muted tiny" data-i18n="noteConvert">${t('noteConvert')}</div>`,
+                  `<button type="button" class="btn full" data-id="btn-conv" data-i18n="btnConv">${t('btnConv')}</button>`,
+                '</div>',
+              '</div>',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="taboo">${t('taboo')}</b><span class="muted">+20pt</span></div>`,
+                  `<button type="button" class="btn full" data-id="btn-taboo" data-i18n="btnTaboo">${t('btnTaboo')}</button>`,
+                '</div>',
+              '</div>',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="unique">${t('unique')}</b><span class="muted">±0pt</span></div>`,
+                  `<div class="muted tiny" data-i18n="uniqueNote">${t('uniqueNote')}</div>`,
+                  `<button type="button" class="btn full" data-id="btn-unique" data-i18n="btnUnique">${t('btnUnique')}</button>`,
+                '</div>',
+              '</div>',
+            '</div>',
+            `<div class="section-title" data-i18n="stepEvents">${t('stepEvents')}</div>`,
+            '<div class="grid-2">',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="remove">${t('remove')}</b><span class="muted"><span data-i18n="next">${t('next')}</span> = <b data-id="nextRemove">0</b> pt</span></div>`,
+                  '<div class="chips">',
+                    `<label class="chip"><input type="checkbox" data-id="chk-remove-bonus" /> <span data-i18n="removeBonus">${t('removeBonus')}</span></label>`,
+                    `<label class="chip"><input type="checkbox" data-id="chk-remove-tag" /> <span data-i18n="removeTag">${t('removeTag')}</span></label>`,
+                  '</div>',
+                  `<button type="button" class="btn full" data-id="btn-remove" data-i18n="btnRemove">${t('btnRemove')}</button>`,
+                  `<div class="muted tiny" data-i18n="removeProg">${t('removeProg')}</div>`,
+                '</div>',
+              '</div>',
+              '<div class="card" style="padding:12px">',
+                '<div class="stack">',
+                  `<div class="row" style="justify-content:space-between"><b data-i18n="copy">${t('copy')}</b><span class="muted"><span data-i18n="next">${t('next')}</span> = <b data-id="nextCopy">0</b> pt</span></div>`,
+                  '<div class="chips">',
+                    `<label class="chip"><input type="checkbox" data-id="chk-copy-spark" /> <span data-i18n="spark">${t('spark')}</span></label>`,
+                    `<label class="chip"><input type="checkbox" data-id="chk-copy-god" /> <span data-i18n="god">${t('god')}</span></label>`,
+                  '</div>',
+                    `<button type="button" class="btn full" data-id="btn-copy" data-i18n="btnCopy">${t('btnCopy')}</button>`,
+                  `<div class="muted tiny" data-i18n="copyProg">${t('copyProg')}</div>`,
+                '</div>',
+              '</div>',
+            '</div>',
+            '<div class="row" style="justify-content:flex-end;gap:8px">',
+              `<button type="button" class="btn secondary small" data-id="btn-undo" data-i18n="btnUndo">${t('btnUndo')}</button>`,
+              `<button type="button" class="btn danger small" data-id="btn-clear" data-i18n="btnClear">${t('btnClear')}</button>`,
+              `<button type="button" class="btn small" data-id="btn-export" data-i18n="btnExport">${t('btnExport')}</button>`,
+            '</div>',
+          '</div>',
+        '</div>',
+        '<div class="card">',
+          '<div class="stack">',
+            `<div class="section-title" data-i18n="logs">${t('logs')}</div>`,
+            '<div data-id="logs" class="stack" style="gap:8px"><div class="muted" data-i18n="noLogs">まだ記録がありません。</div></div>',
+            '<div class="hr"></div>',
+            '<div class="stack">',
+              `<div class="row" style="justify-content:space-between"><span class="muted" data-i18n="cap">${t('cap')}</span><b data-id="sumCap">— pt</b></div>`,
+              `<div class="row" style="justify-content:space-between"><span class="muted" data-i18n="total">${t('total')}</span><b data-id="sumSpent">0 pt</b></div>`,
+              `<div class="row" style="justify-content:space-between"><span class="muted" data-i18n="remain">${t('remain')}</span><b data-id="sumRemain">0 pt</b></div>`,
+            '</div>',
+          '</div>',
+        '</div>',
+      '</div>'
+    ].join('');
+
+    // refs
+    const $ = (sel)=> qs(container, sel);
     const tierSel = $('[data-id="tier"]');
     const nmCk = $('[data-id="nightmare"]');
     const tierOffset = $('[data-id="tierOffset"]');
@@ -471,13 +468,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sumCap = $('[data-id="sumCap"]');
     const sumSpent = $('[data-id="sumSpent"]');
     const sumRemain = $('[data-id="sumRemain"]');
-    const tabooBanner = $('[data-id="tabooBanner"]');
-    const effCapEl = $('[data-id="effCap"]');
-    const ambTotalEl = $('[data-id="ambTotal"]');
-    const trialsEl = $('[data-id="trials"]');
-    const probBtn = $('[data-id="btn-prob"]');
-    const probStatus = $('[data-id="probStatus"]');
-    const probResult = $('[data-id="probResult"]');
     const nextRemove = $('[data-id="nextRemove"]');
     const nextCopy = $('[data-id="nextCopy"]');
     const btnCommon = $('[data-id="btn-common"]');
@@ -491,14 +481,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnClear = $('[data-id="btn-clear"]');
     const btnExport = $('[data-id="btn-export"]');
 
-    // populate controls
+    // init tier select
     for(let i=1;i<=30;i++){ const o=document.createElement('option'); o.value=String(i); o.textContent='T'+i; tierSel.appendChild(o); }
-    function updateTierSelectFromShared(){ tierSel.value = String(shared.tier); }
+    const updateTierSelectFromShared = ()=>{ tierSel.value = String(shared.tier); };
     updateTierSelectFromShared();
     nmCk.checked = !!state.nightmare;
     tierOffset.value = String(state.tierOffset||0);
 
     const calcCap = ()=> 30 + 10*(Math.max(1,shared.tier)-1) + (state.nightmare?10:0) + 10*state.tierOffset;
+
+    const tokens = (s)=> (s||'').split('・').filter(Boolean);
+    const hasToken = (s, t)=> tokens(s).includes(t);
 
     function compute(){
       let removeCount=0, copyCount=0, spent=0;
@@ -539,213 +532,131 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function render(){
-      const cap=calcCap();
+      const capValLocal = calcCap();
       const {arr, spent, nextRemove:nr, nextCopy:nc} = compute();
-      const remain = Math.max(0, cap-spent);
-      capEl.textContent=cap; spentEl.textContent=spent; remainEl.textContent=remain;
-      qs(container, '[data-id="bar"]').style.width = (cap?Math.min(100,Math.max(0,spent/cap*100)):0).toFixed(2)+'%';
+      const remain = Math.max(0, capValLocal-spent);
+      capEl.textContent=capValLocal; spentEl.textContent=spent; remainEl.textContent=remain;
+      qs(container, '[data-id="bar"]').style.width = (capValLocal?Math.min(100,Math.max(0,spent/capValLocal*100)):0).toFixed(2)+'%';
       nextRemove.textContent = nr; nextCopy.textContent = nc;
-      sumCap.textContent=cap+' pt'; sumSpent.textContent=spent+' pt'; sumRemain.textContent=remain+' pt';
 
       const logsEl = logs;
       logsEl.innerHTML='';
-      if(arr.length===0){ logsEl.innerHTML='<div class="muted">まだ記録がありません。</div>'; }
+      if(arr.length===0){ logsEl.innerHTML='<div class="muted" data-i18n="noLogs">'+t('noLogs')+'</div>'; }
+
       arr.forEach((l,i)=>{
         const row = document.createElement('div'); row.className='log';
         const left = document.createElement('div'); left.className='truncate';
-        const label = l.raw.label + (l.raw.note? `（${l.raw.note}）`:``);
-        left.textContent = label + (l.raw.name? ` 【${l.raw.name}】` : '');
+
+        // ラベルと補足の表示（翻訳）
+        const baseLabel = localizeCoreLabel(l.raw.label);
+        let extraNote = '';
+        if(l.raw.note){
+          const shown = (l.raw.note || '')
+            .split('・')
+            .map(localizeNotePart)
+            .filter(Boolean);
+          if(shown.length){ extraNote = '（' + shown.join('・') + '）'; }
+        }
+        left.textContent = baseLabel + extraNote + (l.raw.name? ` 【${l.raw.name}】` : '');
+
         const mid = document.createElement('div'); mid.className='row';
 
         if(l.raw.label.startsWith('排除')){
           if(!hasToken(l.raw.note,'【排除】効果')){
-            const b=document.createElement('button'); b.className='xbtn tiny'; b.textContent='+ 【排除】効果(0pt)'; b.onclick=()=>addNote(l.raw,'【排除】効果'); mid.appendChild(b);
+            const b=document.createElement('button'); b.type='button'; b.className='xbtn tiny'; b.textContent=t('addRemoveTag'); b.onclick=()=>addNote(l.raw,'【排除】効果'); mid.appendChild(b);
           }
           if(!hasToken(l.raw.note,'開始固有カードの排除+20')){
-            const b=document.createElement('button'); b.className='xbtn tiny'; b.textContent='+ 開始固有カードの排除+20'; b.onclick=()=>addNote(l.raw,'開始固有カードの排除+20'); mid.appendChild(b);
+            const b=document.createElement('button'); b.type='button'; b.className='xbtn tiny'; b.textContent=t('addRemoveBonus'); b.onclick=()=>addNote(l.raw,'開始固有カードの排除+20'); mid.appendChild(b);
           }
         }else{
           if(!(hasToken(l.raw.note,'ヒラメキ+10')||hasToken(l.raw.note,'ヒラメキ+0'))){
-            const b=document.createElement('button'); b.className='xbtn tiny'; b.textContent=(l.raw.label==='固有カード'?'+ ヒラメキ+0':'+ ヒラメキ+10'); b.onclick=()=>addNote(l.raw,'ヒラメキ+10'); mid.appendChild(b);
+            const b=document.createElement('button'); b.type='button'; b.className='xbtn tiny'; b.textContent=(l.raw.label==='固有カード'?t('addSpark0'):t('addSpark10')); b.onclick=()=>addNote(l.raw,'ヒラメキ+10'); mid.appendChild(b);
           }
           if(!hasToken(l.raw.note,'神ヒラメキ+20')){
-            const b=document.createElement('button'); b.className='xbtn tiny'; b.textContent='+ 神ヒラメキ+20'; b.onclick=()=>addNote(l.raw,'神ヒラメキ+20'); mid.appendChild(b);
+            const b=document.createElement('button'); b.type='button'; b.className='xbtn tiny'; b.textContent=t('addGod20'); b.onclick=()=>addNote(l.raw,'神ヒラメキ+20'); mid.appendChild(b);
           }
         }
+
         const right = document.createElement('div'); right.innerHTML = `<span class="pt-ok">+${l.base} pt</span>`;
-        const del = document.createElement('button'); del.className='xbtn tiny'; del.textContent='×'; del.onclick=()=>{ state.logsRaw.splice(i,1); render(); };
+        const del = document.createElement('button'); del.type='button'; del.className='xbtn tiny'; del.textContent='×'; del.onclick=()=>{ state.logsRaw.splice(i,1); render(); };
         row.appendChild(left); row.appendChild(mid); row.appendChild(right); row.appendChild(del);
         logsEl.appendChild(row);
 
+        // 子行：ヒラメキ
         if ((l.raw.label!=='固有カード' && hasToken(l.raw.note,'ヒラメキ+10')) || (l.raw.label==='固有カード' && hasToken(l.raw.note,'ヒラメキ+0')) ){
           const r=document.createElement('div'); r.className='log child';
-          r.innerHTML=`<div class="truncate">↳ ヒラメキ</div><div></div><div><span class="pt-ok">+${l.raw.label==='固有カード'?0:10} pt</span></div>`;
-          const del2 = document.createElement('button'); del2.className='xbtn tiny'; del2.textContent='×'; del2.onclick=()=>{
+          r.innerHTML=`<div class="truncate">${t('childSpark')}</div><div></div><div><span class="pt-ok">+${l.raw.label==='固有カード'?0:10} pt</span></div>`;
+          const del2 = document.createElement('button'); del2.type='button'; del2.className='xbtn tiny'; del2.textContent='×'; del2.onclick=()=>{
             const parts=(l.raw.note||'').split('・').filter(x=>!(x==='ヒラメキ+10'||x==='ヒラメキ+0')); l.raw.note=parts.join('・'); render();
           };
           r.appendChild(del2); logsEl.appendChild(r);
         }
+        // 子行：神ヒラメキ
         if (hasToken(l.raw.note,'神ヒラメキ+20')){
           const r=document.createElement('div'); r.className='log child';
-          r.innerHTML=`<div class="truncate">↳ 神ヒラメキ</div><div></div><div><span class="pt-ok">+20 pt</span></div>`;
-          const del2 = document.createElement('button'); del2.className='xbtn tiny'; del2.textContent='×'; del2.onclick=()=>{
+          r.innerHTML=`<div class="truncate">${t('childGod')}</div><div></div><div><span class="pt-ok">+20 pt</span></div>`;
+          const del2 = document.createElement('button'); del2.type='button'; del2.className='xbtn tiny'; del2.textContent='×'; del2.onclick=()=>{
             const parts=(l.raw.note||'').split('・').filter(x=>x!=='神ヒラメキ+20'); l.raw.note=parts.join('・'); render();
           };
           r.appendChild(del2); logsEl.appendChild(r);
         }
       });
 
+      // 合計（重複宣言のバグ修正：capValLocal を再利用）
+      sumCap.textContent=capValLocal+' pt';
+      sumSpent.textContent=spent+' pt';
+      sumRemain.textContent=(capValLocal-spent)+' pt';
+
       saveState();
-      renderProb();
       applyStaticI18n();
     }
 
-    function renderProb(){
-      const cooked = compute().arr;
-      const taboos = cooked.filter(x=> x.raw.label==='禁忌カード').length;
-      const effCap = Math.max(0, calcCap() - 20*taboos);
-      effCapEl.textContent = effCap;
-      if (taboos>0){
-        tabooBanner.style.display='block';
-        tabooBanner.textContent = i18n[getLang()].tabooWarn(taboos,20*taboos);
-      } else {
-        tabooBanner.style.display='none';
-        tabooBanner.textContent='';
-      }
+    // 操作
+    const add = (label, note)=>{ state.logsRaw.push(note?{label, note}:{label}); render(); };
 
-      let ambTotal=0;
-      cooked.forEach(l=>{
-        if(l.base>0) ambTotal+=l.base;
-        const note=l.raw.note||'';
-        if((l.raw.label==='固有カード') && note.includes('ヒラメキ+0')) ambTotal+=0;
-        if(note.includes('ヒラメキ+10')) ambTotal+=10;
-        if(note.includes('神ヒラメキ+20')) ambTotal+=20;
-      });
-      ambTotalEl.textContent = ambTotal;
-
-      const table = (rows)=>{
-        if(rows.length===0){
-          probResult.innerHTML='<div class="muted">'+t('noLogs')+'</div>'; return;
-        }
-        probResult.innerHTML = `<table><thead><tr><th>${t('tableHeadItem')}</th><th>${t('tableHeadPt')}</th><th>${t('tableHeadProb')}</th></tr></thead><tbody>`+
-          rows.map(r=>`<tr><td>${r.label}</td><td>${r.cost}</td><td>${(r.p*100).toFixed(1)}%</td></tr>`).join('')+
-          `</tbody></table>`;
-      };
-
-      function simulate(trials){
-        const map = new Map();
-        function inc(key){ map.set(key,(map.get(key)||0)+1); }
-        let valid=0;
-        for(let t=0;t<trials;t++){
-          let sum=0;
-          const picked=new Set();
-
-          cooked.forEach(l=>{
-            if(l.base>0){ if(Math.random()<0.5){ sum+=l.base; picked.add(l.raw.label+'|'+l.base); } }
-            else { picked.add(l.raw.label+'|0'); }
-          });
-
-          cooked.forEach(l=>{
-            const note=l.raw.note||'';
-            const parentPicked = l.base===0 || picked.has(l.raw.label+'|'+(l.base>0?l.base:0));
-            if(!parentPicked) return;
-            if((l.raw.label==='固有カード') && note.includes('ヒラメキ+0')) picked.add('↳ ヒラメキ|0');
-            if(note.includes('ヒラメキ+10') && Math.random()<0.5){ sum+=10; picked.add('↳ ヒラメキ|10'); }
-            if(note.includes('神ヒラメキ+20') && Math.random()<0.5){ sum+=20; picked.add('↳ 神ヒラメキ|20'); }
-          });
-
-          if(sum<=effCap){
-            valid++;
-            picked.forEach(k=>inc(k));
-          }
-        }
-
-        const rows=[];
-        cooked.forEach(l=>{
-          const key = l.raw.label+'|'+(l.base>0?l.base:0);
-          rows.push({label:l.raw.label, cost:(l.base>0?l.base:0), p: (l.base===0?1: (valid?(map.get(key)||0)/valid:0))});
-          const note=l.raw.note||'';
-          if((l.raw.label==='固有カード' && note.includes('ヒラメキ+0')) || note.includes('ヒラメキ+10')){
-            const cost=(l.raw.label==='固有カード' && note.includes('ヒラメキ+0'))?0:10;
-            rows.push({label:'↳ ヒラメキ', cost, p: (valid?(map.get('↳ ヒラメキ|'+cost)||0)/valid:0)});
-          }
-          if(note.includes('神ヒラメキ+20')){
-            rows.push({label:'↳ 神ヒラメキ', cost:20, p: (valid?(map.get('↳ 神ヒラメキ|20')||0)/valid:0)});
-          }
-        });
-        return rows;
-      }
-
-      probBtn.onclick = ()=>{
-        const btn=probBtn; btn.disabled=true; probStatus.textContent=t('probCalc');
-        setTimeout(()=>{
-          const trials = Math.max(200, parseInt(trialsEl.value||'5000',10));
-          const rows = simulate(trials);
-          probStatus.textContent=t('probDone');
-          btn.disabled=false;
-          table(rows);
-        },0);
-      };
-    }
-
-    // listeners & persistence
-    function loadState(){
-      try{
-        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        return { nightmare: !!raw.nightmare, tierOffset: Number.isFinite(raw.tierOffset)? raw.tierOffset : 0, logsRaw: Array.isArray(raw.logsRaw)? raw.logsRaw : [] };
-      }catch(_){ return {nightmare:false, tierOffset:0, logsRaw:[]}; }
-    }
-
-    btnCommon.addEventListener('click', ()=>{ state.logsRaw.push({label:'共用カード獲得'}); render(); });
-    btnMon.addEventListener('click', ()=>{ state.logsRaw.push({label:'モンスターカード獲得'}); render(); });
-    btnConv.addEventListener('click', ()=>{ state.logsRaw.push({label:'カード変換'}); render(); });
-    btnTaboo.addEventListener('click', ()=>{ state.logsRaw.push({label:'禁忌カード'}); render(); });
-    btnUnique.addEventListener('click', ()=>{ state.logsRaw.push({label:'固有カード'}); render(); });
+    btnCommon.addEventListener('click', ()=> add('共用カード獲得'));
+    btnMon.addEventListener('click', ()=> add('モンスターカード獲得'));
+    btnConv.addEventListener('click', ()=> add('カード変換'));
+    btnTaboo.addEventListener('click', ()=> add('禁忌カード'));
+    btnUnique.addEventListener('click', ()=> add('固有カード'));
     btnRemove.addEventListener('click', ()=>{
       const parts=[];
       if(qs(container,'[data-id="chk-remove-bonus"]').checked) parts.push('開始固有カードの排除+20');
       if(qs(container,'[data-id="chk-remove-tag"]').checked) parts.push('【排除】効果');
-      state.logsRaw.push({label:'排除', note: parts.join('・')||undefined});
+      add('排除', parts.join('・')||undefined);
       qs(container,'[data-id="chk-remove-bonus"]').checked=false;
       qs(container,'[data-id="chk-remove-tag"]').checked=false;
-      render();
     });
     btnCopy.addEventListener('click', ()=>{
       const parts=[];
       if(qs(container,'[data-id="chk-copy-spark"]').checked) parts.push('ヒラメキ+10');
       if(qs(container,'[data-id="chk-copy-god"]').checked) parts.push('神ヒラメキ+20');
-      state.logsRaw.push({label:'コピー', note: parts.join('・')||undefined});
+      add('コピー', parts.join('・')||undefined);
       qs(container,'[data-id="chk-copy-spark"]').checked=false;
       qs(container,'[data-id="chk-copy-god"]').checked=false;
-      render();
     });
     btnUndo.addEventListener('click', ()=>{ state.logsRaw.pop(); render(); });
-    btnClear.addEventListener('click', ()=>{ state.logsRaw=[]; render(); });
+    btnClear.addEventListener('click', ()=>{ if(confirm('履歴を消去しますか？')){ state.logsRaw=[]; render(); } });
     btnExport.addEventListener('click', ()=>{
-      const headers = ['index','label','name','note','base','spark','god','total'];
-      const calc=compute();
-      const rows = calc.arr.map((l,i)=>[i+1,l.raw.label,(l.raw.name||''),(l.raw.note||''),l.base,l.cS,l.cG,l.total]);
+      const headers = ['index','label','name','note'];
+      const rows = state.logsRaw.map((l,i)=>[i+1,l.label,(l.name||''),(l.note||'')]);
       const csv = [headers.join(','), ...rows.map(r=>r.join(','))].join('\n');
       const blob = new Blob([csv], {type:'text/csv'});
       const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`CZN_point_logs_${suffix}.csv`; a.click(); URL.revokeObjectURL(a.href);
     });
 
-    for(let i=1;i<=30;i++){ const o=document.createElement('option'); o.value=String(i); o.textContent='T'+i; tierSel.appendChild(o); }
-    function updateTierSelectFromShared(){ tierSel.value = String(shared.tier); }
-    updateTierSelectFromShared();
-    nmCk.checked = !!state.nightmare;
-    tierOffset.value = String(state.tierOffset||0);
-
+    // ティア同期
+    const updateTierSelectFromShared2 = ()=>{ tierSel.value = String(shared.tier); };
+    updateTierSelectFromShared2();
     tierSel.addEventListener('change', e=>{ const v=parseInt(e.target.value,10)||1; if(shared.tier!==v) shared.tier=v; });
-    document.addEventListener('czn:tier-changed', ()=>{ updateTierSelectFromShared(); render(); });
+    document.addEventListener('czn:tier-changed', ()=>{ updateTierSelectFromShared2(); render(); });
     nmCk.addEventListener('change', e=>{ state.nightmare=!!e.target.checked; render(); });
     tierOffset.addEventListener('input', e=>{ state.tierOffset=parseInt(e.target.value,10)||0; render(); });
 
     render();
   }
 
-  // build three panels
-  function rebuildAll(){
+  const rebuildAll = () => {
     ['panelA','panelB','panelC'].forEach(id=>{
       const el=document.getElementById(id);
       el.innerHTML='';
@@ -753,10 +664,8 @@ document.addEventListener('DOMContentLoaded', () => {
     buildCalculator(document.getElementById('panelA'),'A');
     buildCalculator(document.getElementById('panelB'),'B');
     buildCalculator(document.getElementById('panelC'),'C');
-  }
-  buildCalculator(document.getElementById('panelA'), 'A');
-  buildCalculator(document.getElementById('panelB'), 'B');
-  buildCalculator(document.getElementById('panelC'), 'C');
+  };
+  rebuildAll();
 
   // tabs
   document.querySelectorAll('.tab').forEach(tab=>{
@@ -770,19 +679,37 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // language buttons
-  const saved = getLang();
-  document.querySelectorAll(`.langbtn`).forEach(b=>{
-    if(b.getAttribute('data-lang')===saved) b.classList.add('active');
+  const savedLang = getLang();
+  document.querySelectorAll('.langbtn').forEach(b=>{
+    if(b.getAttribute('data-lang')===savedLang) b.classList.add('active');
     b.addEventListener('click', ()=>{
       const lang=b.getAttribute('data-lang');
       setLang(lang);
       document.querySelectorAll('.langbtn').forEach(x=>x.classList.toggle('active', x===b));
       applyStaticI18n();
-      rebuildAll();
+      rebuildAll(); // 言語切替時に再構築（履歴も翻訳表示）
     });
   });
   applyStaticI18n();
 });
+</script>
+
+<!-- JSON-LD multilingual metadata -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"カオゼロ｜セーブデータ計算機",
+  "alternateName":[
+    "카오제로 계산기","CZN 계산기",
+    "卡奥零 计算器","CZN 计算器",
+    "KaoZero calculator","CZN save data calculator"
+  ],
+  "url":"https://example.com/",
+  "inLanguage":["ja","ko","zh-Hans","en"],
+  "applicationCategory":"GameApplication",
+  "operatingSystem":"Any"
+}
 </script>
 </body>
 </html>
